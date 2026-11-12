@@ -1,73 +1,391 @@
-PROJECT NAME: INSTANT
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#102b75">
+<title>INSTANT</title>
 
-I want you to rebuild my existing INSTANT application into a professional, modern, worldwide social networking platform.
+<style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
 
-IMPORTANT: Use the second reference screenshot (WN Social) as the design inspiration, but replace WN Social with INSTANT. Do not copy its name or branding.
+body {
+  min-height: 100vh;
+  background: linear-gradient(145deg,#071d62,#0758ed,#7049ed);
+  color: white;
+  padding: 25px 18px;
+}
 
-1. BRANDING
+header {
+  text-align: center;
+  padding: 25px 0;
+}
 
-- App name must be INSTANT everywhere.
-- Create a beautiful blue and purple design.
-- Professional logo and loading animation.
-- Modern buttons, cards and input fields.
-- Responsive on Android phones and computers.
+.logo {
+  width: 95px;
+  height: 95px;
+  border-radius: 50%;
+  background: white;
+  color: #174bdc;
+  display: grid;
+  place-items: center;
+  font-size: 38px;
+  font-weight: bold;
+  margin: auto auto 18px;
+  box-shadow: 0 0 20px #ffffff55;
+}
 
-2. LOGIN PAGE
-   Create a beautiful login page with:
+header h1 {
+  font-size: 36px;
+  margin-bottom: 12px;
+}
 
-- INSTANT logo.
-- Email or phone number field.
-- Password field.
-- Show/hide password button.
-- Forgot password.
-- Sign in button.
-- Create account link.
+header p {
+  color: #dce5ff;
+  font-size: 17px;
+}
 
-3. SIGN-UP MUST LOAD STEP BY STEP.
+.card {
+  max-width: 520px;
+  margin: 20px auto;
+  background: rgba(12,25,58,.90);
+  border: 1px solid #ffffff22;
+  border-radius: 30px;
+  padding: 25px;
+  box-shadow: 0 15px 40px #0003;
+}
 
-Do NOT put all registration fields on one page.
+h2 {
+  font-size: 30px;
+  margin-bottom: 12px;
+}
 
-Page 1: Enter full name.
-Page 2: Enter email address.
-Page 3: Enter phone number.
-Page 4: Create password.
-Page 5: Confirm password.
-Page 6: Date of birth (THIS MUST BE THE LAST PAGE).
+.subtitle {
+  color: #b7c8eb;
+  margin-bottom: 25px;
+  line-height: 1.5;
+}
 
-Every page must have:
+input {
+  width: 100%;
+  padding: 19px;
+  margin: 9px 0;
+  border-radius: 19px;
+  border: 1px solid #ffffff22;
+  background: #19243e;
+  color: white;
+  font-size: 17px;
+  outline: none;
+}
 
-- A Continue button.
-- A Back button.
-- A loading transition when moving to the next page.
-- Progress indicator showing the current step.
+input:focus {
+  border-color: #6b70ff;
+}
 
-4. AFTER REGISTRATION
+input::placeholder {
+  color: #aebbd2;
+}
 
-- Save the user's account securely.
-- Allow users to log in again.
-- Create a personal profile.
-- Allow profile pictures and profile editing.
+button {
+  width: 100%;
+  padding: 19px;
+  margin-top: 15px;
+  border: none;
+  border-radius: 17px;
+  background: linear-gradient(90deg,#0754eb,#7048ef);
+  color: white;
+  font-size: 19px;
+  font-weight: bold;
+  cursor: pointer;
+}
 
-5. SOCIAL FEATURES
+button:disabled {
+  opacity: .6;
+}
 
-- Home feed.
-- Search users.
-- Follow and unfollow.
-- Like and comment.
-- Upload pictures and videos.
-- Messaging.
-- Notifications.
-- User profiles.
+.secondary {
+  background: #263858;
+}
 
-6. IMPORTANT TECHNICAL REQUIREMENTS
+.bottom {
+  text-align: center;
+  margin: 25px 0;
+  color: #dce5ff;
+  line-height: 2;
+}
 
-- Do not create fake buttons.
-- Do not use placeholder users or fake messages.
-- All buttons must work.
-- All pages must navigate correctly.
-- Connect authentication and database properly.
-- Make the application work on mobile browsers.
-- Do not destroy existing working files unnecessarily.
-- Keep the application name as INSTANT, not WN Social.
+.link {
+  color: #fff;
+  text-decoration: underline;
+  font-weight: bold;
+  cursor: pointer;
+}
 
-Build this as a real working application, not just a visual demonstration. Test all navigation and registration steps before finishing.
+.step {
+  color: #aebfff;
+  margin-bottom: 20px;
+  font-size: 14px;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.error {
+  color: #ffaaaa;
+  margin-top: 12px;
+  line-height: 1.5;
+}
+
+#loading {
+  text-align: center;
+  padding: 30px;
+}
+
+.spinner {
+  width: 48px;
+  height: 48px;
+  border: 5px solid #ffffff44;
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin .8s linear infinite;
+  margin: 20px auto;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.progress {
+  height: 5px;
+  background: #ffffff33;
+  border-radius: 10px;
+  margin-bottom: 25px;
+  overflow: hidden;
+}
+
+.progress div {
+  height: 100%;
+  background: #7564ff;
+  transition: width .3s;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">I</div>
+  <h1>INSTANT</h1>
+  <p>Connect with people. Share your moments. Discover the world.</p>
+</header>
+
+<div class="card" id="login">
+  <h2>Welcome</h2>
+  <p class="subtitle">Sign in to your INSTANT account.</p>
+
+  <form id="loginForm">
+    <input type="text" placeholder="Email or phone number" required>
+    <input type="password" placeholder="Password" required>
+    <button type="submit">➜ Sign in</button>
+  </form>
+
+  <p class="bottom">
+    <span class="link" onclick="forgot()">Forgot password?</span>
+    <br>
+    Don't have an account?
+    <span class="link" onclick="showSignup()">Create new</span>
+  </p>
+  <p id="loginMessage" class="error"></p>
+</div>
+
+<div class="card hidden" id="signup">
+
+  <h2>Create your account</h2>
+  <p class="subtitle">Join the worldwide INSTANT community.</p>
+
+  <div class="progress">
+    <div id="bar" style="width:16.66%"></div>
+  </div>
+
+  <div class="step" id="stepNumber">STEP 1 OF 6</div>
+
+  <form id="signupForm">
+
+    <div id="page1">
+      <h2>Email address</h2>
+      <p class="subtitle">Enter your email address.</p>
+      <input type="email" id="email" placeholder="Your email address" required>
+    </div>
+
+    <div id="page2" class="hidden">
+      <h2>Phone number</h2>
+      <p class="subtitle">Enter your phone number.</p>
+      <input type="tel" id="phone" placeholder="+234 800 000 0000" required>
+    </div>
+
+    <div id="page3" class="hidden">
+      <h2>Your name</h2>
+      <p class="subtitle">What should people call you?</p>
+      <input type="text" id="fullname" placeholder="Your full name" required>
+    </div>
+
+    <div id="page4" class="hidden">
+      <h2>Create password</h2>
+      <p class="subtitle">Choose a strong password.</p>
+      <input type="password" id="password" placeholder="Create password" minlength="8" required>
+    </div>
+
+    <div id="page5" class="hidden">
+      <h2>Confirm password</h2>
+      <p class="subtitle">Enter your password again.</p>
+      <input type="password" id="confirm" placeholder="Confirm password" required>
+    </div>
+
+    <div id="page6" class="hidden">
+      <h2>Date of birth</h2>
+      <p class="subtitle">This is the final registration step.</p>
+      <input type="date" id="birthdate" required>
+    </div>
+
+    <p id="error" class="error"></p>
+
+    <button type="button" id="next" onclick="nextStep()">Continue ➜</button>
+    <button type="button" class="secondary hidden" id="back" onclick="previousStep()">← Back</button>
+
+  </form>
+
+  <p class="bottom">
+    Already have an account?
+    <span class="link" onclick="showLogin()">Sign in</span>
+  </p>
+
+</div>
+
+<div class="card hidden" id="loading">
+  <div class="spinner"></div>
+  <h2>Welcome to INSTANT</h2>
+  <p class="subtitle">Preparing your experience...</p>
+</div>
+
+<div class="card hidden" id="home">
+  <h2 id="welcome">Welcome to INSTANT!</h2>
+  <p class="subtitle">Your worldwide community starts here.</p>
+  <button onclick="showLogin()">Sign out</button>
+</div>
+
+<script>
+let current = 1;
+
+function show(id) {
+  ["login","signup","loading","home"].forEach(x =>
+    document.getElementById(x).classList.add("hidden")
+  );
+  document.getElementById(id).classList.remove("hidden");
+}
+
+function showSignup() {
+  current = 1;
+  show("signup");
+  updatePage();
+}
+
+function showLogin() {
+  show("login");
+}
+
+function updatePage() {
+  for(let i=1;i<=6;i++) {
+    document.getElementById("page"+i)
+      .classList.toggle("hidden",i!==current);
+  }
+
+  document.getElementById("stepNumber").textContent =
+    "STEP "+current+" OF 6";
+
+  document.getElementById("bar").style.width =
+    (current/6*100)+"%";
+
+  document.getElementById("back").classList.toggle("hidden",current===1);
+
+  document.getElementById("next").textContent =
+    current===6 ? "Finish registration ✓" : "Continue ➜";
+
+  document.getElementById("error").textContent="";
+}
+
+function nextStep() {
+  let field = document.querySelector("#page"+current+" input");
+  let error = document.getElementById("error");
+
+  if(!field.value.trim() || !field.checkValidity()) {
+    error.textContent="Please enter valid information before continuing.";
+    field.reportValidity();
+    return;
+  }
+
+  if(current===5 &&
+     document.getElementById("password").value !==
+     document.getElementById("confirm").value) {
+    error.textContent="Your passwords do not match.";
+    return;
+  }
+
+  if(current<6) {
+    current++;
+    updatePage();
+  } else {
+    const birth = new Date(document.getElementById("birthdate").value);
+    const today = new Date();
+
+    let age = today.getFullYear()-birth.getFullYear();
+    const beforeBirthday =
+      today.getMonth()<birth.getMonth() ||
+      (today.getMonth()===birth.getMonth() &&
+       today.getDate()<birth.getDate());
+
+    if(beforeBirthday) age--;
+
+    if(birth>today || age<13) {
+      error.textContent="You must be at least 13 years old to register.";
+      return;
+    }
+
+    document.getElementById("welcome").textContent =
+      "Welcome to INSTANT, "+
+      document.getElementById("fullname").value+"!";
+
+    show("loading");
+
+    setTimeout(()=>show("home"),1800);
+  }
+}
+
+function previousStep() {
+  if(current>1) {
+    current--;
+    updatePage();
+  }
+}
+
+function forgot() {
+  alert("Password recovery will be available after authentication is connected.");
+}
+
+document.getElementById("loginForm").addEventListener("submit",e=>{
+  e.preventDefault();
+  document.getElementById("loginMessage").textContent =
+    "Login authentication must be connected before accounts can sign in.";
+});
+
+document.getElementById("birthdate").max =
+  new Date().toISOString().split("T")[0];
+</script>
+
+</body>
+   </html>
