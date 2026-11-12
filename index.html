@@ -4,51 +4,294 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>INSTANT</title>
+
 <style>
-*{box-sizing:border-box}
-body{margin:0;background:#f5f5f5;color:#171717;font-family:Arial,sans-serif}
-header{background:#fff;padding:18px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #ddd}
-.logo{font-size:27px;font-weight:bold;color:#635bff}
-main{max-width:600px;margin:auto;padding:18px}
-.card{background:white;padding:22px;border-radius:14px;margin:18px 0}
-h2{margin-top:0}
-input,button{width:100%;padding:14px;margin:8px 0;border-radius:9px;font-size:16px}
-input{border:1px solid #ccc}
-button{border:0;background:#635bff;color:white;font-weight:bold}
-nav{position:fixed;bottom:0;background:white;width:100%;display:flex;justify-content:space-around;padding:15px;border-top:1px solid #ddd}
-nav span{font-size:14px}
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #090914;
+  color: white;
+}
+
+header {
+  padding: 22px;
+  font-size: 30px;
+  font-weight: bold;
+  color: #7565ff;
+  text-align: center;
+  border-bottom: 1px solid #29283b;
+}
+
+.container {
+  max-width: 460px;
+  margin: 45px auto;
+  padding: 25px;
+}
+
+h1 {
+  font-size: 30px;
+  text-align: center;
+}
+
+.subtitle {
+  color: #aaa9bd;
+  text-align: center;
+  line-height: 1.6;
+  margin-bottom: 35px;
+}
+
+.progress {
+  height: 6px;
+  background: #29283b;
+  border-radius: 10px;
+  margin: 25px 0;
+}
+
+#bar {
+  height: 6px;
+  width: 14%;
+  background: #7565ff;
+  border-radius: 10px;
+  transition: width .3s;
+}
+
+.step {
+  display: none;
+}
+
+.step.active {
+  display: block;
+}
+
+label {
+  display: block;
+  margin: 20px 0 10px;
+  color: #c7c5dc;
+}
+
+input {
+  width: 100%;
+  padding: 17px;
+  border: 1px solid #414057;
+  border-radius: 12px;
+  background: #191829;
+  color: white;
+  font-size: 16px;
+  outline: none;
+}
+
+input:focus {
+  border-color: #7565ff;
+}
+
+button {
+  width: 100%;
+  padding: 17px;
+  margin-top: 22px;
+  border: none;
+  border-radius: 12px;
+  background: #7565ff;
+  color: white;
+  font-size: 17px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.back {
+  background: #29283b;
+}
+
+.message {
+  color: #ff8585;
+  margin-top: 12px;
+  min-height: 20px;
+}
+
+.small {
+  color: #aaa9bd;
+  text-align: center;
+  margin-top: 20px;
+}
+
+footer {
+  text-align: center;
+  color: #77758d;
+  padding: 25px;
+}
 </style>
 </head>
+
 <body>
-<header>
-<div class="logo">INSTANT</div>
-<div>🌍</div>
-</header>
-<main>
-<div class="card">
-<h2>Welcome to INSTANT</h2>
-<p>Connect with people. Share your moments. Discover the world.</p>
+
+<header>INSTANT 🌍</header>
+
+<div class="container">
+
+<div id="welcome">
+<h1>Welcome to INSTANT</h1>
+<p class="subtitle">
+Connect with people. Share your moments.
+Discover the world.
+</p>
+<button onclick="start()">Create your account</button>
+<button class="back" onclick="alert('Login will be connected to the account system.')">
+Log in
+</button>
 </div>
-<div class="card">
-<h2>Create your account</h2>
-<input type="text" placeholder="Your full name">
-<input type="email" placeholder="Email address">
-<input type="tel" placeholder="Phone number">
-<input type="password" placeholder="Create password">
-<button onclick="alert('Account registration will be connected next.')">Join INSTANT</button>
-<p>Already have an account? Sign in</p>
+
+<div id="registration" style="display:none">
+
+<div class="progress">
+<div id="bar"></div>
 </div>
-<div class="card">
-<h2>Your world starts here.</h2>
-<p>Photos • Videos • Friends • Messages • Shopping</p>
+
+<p class="small" id="counter"></p>
+
+<form id="form">
+
+<div class="step active">
+<h1>Your full name</h1>
+<p class="subtitle">What should we call you?</p>
+<input id="name" placeholder="Enter your full name" required>
 </div>
-</main>
-<nav>
-<span>🏠 Home</span>
-<span>🔍 Search</span>
-<span>➕ Create</span>
-<span>💬 Messages</span>
-<span>👤 Profile</span>
-</nav>
+
+<div class="step">
+<h1>Choose a username</h1>
+<p class="subtitle">Create your unique INSTANT identity.</p>
+<input id="username" placeholder="Choose username" required>
+</div>
+
+<div class="step">
+<h1>Your email</h1>
+<p class="subtitle">Enter your email address.</p>
+<input id="email" type="email" placeholder="Email address" required>
+</div>
+
+<div class="step">
+<h1>Your phone number</h1>
+<p class="subtitle">Enter your mobile number with country code.</p>
+<input id="phone" type="tel" placeholder="+234..." required>
+</div>
+
+<div class="step">
+<h1>Create password</h1>
+<p class="subtitle">Choose a strong password.</p>
+<input id="password" type="password"
+placeholder="At least 8 characters" required minlength="8">
+</div>
+
+<div class="step">
+<h1>Confirm password</h1>
+<p class="subtitle">Enter your password again.</p>
+<input id="confirm" type="password"
+placeholder="Confirm password" required>
+</div>
+
+<div class="step">
+<h1>Your birthday 🎂</h1>
+<p class="subtitle">
+When is your date of birth?
+Your birthday is private by default.
+</p>
+<label>Date of birth</label>
+<input id="birthday" type="date" required>
+</div>
+
+<p class="message" id="error"></p>
+
+<button type="button" id="next" onclick="nextStep()">
+Continue
+</button>
+
+<button type="button" class="back"
+id="previous" onclick="previousStep()">
+Back
+</button>
+
+</form>
+</div>
+
+</div>
+
+<footer>INSTANT © 2026</footer>
+
+<script>
+let current = 0;
+const steps = document.querySelectorAll(".step");
+
+function start() {
+  document.getElementById("welcome").style.display = "none";
+  document.getElementById("registration").style.display = "block";
+  update();
+}
+
+function update() {
+  steps.forEach((step, index) => {
+    step.classList.toggle("active", index === current);
+  });
+
+  document.getElementById("bar").style.width =
+    ((current + 1) / steps.length * 100) + "%";
+
+  document.getElementById("counter").textContent =
+    "Step " + (current + 1) + " of " + steps.length;
+
+  document.getElementById("previous").style.display =
+    current === 0 ? "none" : "block";
+
+  document.getElementById("next").textContent =
+    current === steps.length - 1
+    ? "Complete Registration"
+    : "Continue";
+
+  document.getElementById("error").textContent = "";
+}
+
+function nextStep() {
+  const input = steps[current].querySelector("input");
+  const error = document.getElementById("error");
+
+  if (!input.value.trim() || !input.checkValidity()) {
+    error.textContent = "Please enter valid information.";
+    input.reportValidity();
+    return;
+  }
+
+  if (current === 5 &&
+      document.getElementById("password").value !==
+      document.getElementById("confirm").value) {
+    error.textContent = "Passwords do not match.";
+    return;
+  }
+
+  if (current === 6) {
+    const birthday = new Date(input.value + "T00:00:00");
+    const today = new Date();
+
+    if (birthday >= today) {
+      error.textContent = "Please enter a valid date of birth.";
+      return;
+    }
+
+    alert("Registration pages completed! Account creation will be enabled after secure authentication is connected.");
+    return;
+  }
+
+  current++;
+  update();
+}
+
+function previousStep() {
+  if (current > 0) {
+    current--;
+    update();
+  }
+}
+</script>
+
 </body>
-</html>
+  </html>
